@@ -10,6 +10,4 @@ mkDerivation {
   testHaskellDepends = [ base hspec ];
   homepage = "https://github.com/srdqty/haskell-project-template#readme";
   license = stdenv.lib.licenses.bsd3;
-  enableSharedLibraries = true;
-  enableStaticLibraries = true;
 }
