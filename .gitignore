@@ -2,7 +2,7 @@
 *.swp
 
 # docker build
-/result
+/docker-image.tar.gz
 
 # Created by https://www.gitignore.io/api/haskell
 

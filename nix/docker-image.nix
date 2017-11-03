@@ -7,7 +7,7 @@ let
     overrides = new: old: {
       haskell-project-template =
         pkgs.haskell.lib.justStaticExecutables
-          (old.callPackage ./. { });
+          (old.callPackage ../. { });
     };
   };
 in
