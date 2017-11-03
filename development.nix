@@ -1,14 +1,6 @@
 { compiler ? "ghc802" }:
 
 let
-  overlay = self: super: {
-    haskell.packages."${compiler}" = super.haskell.packages."${compiler}".override {
-      overrides = new: old: {
-        haskell-project-template = old.callPackage ./. { };
-      };
-    };
-  };
-
   bootstrap = import <nixpkgs> { };
 
   nixpkgs = builtins.fromJSON (builtins.readFile ./nixpkgs.json);
@@ -17,9 +9,13 @@ let
     inherit (nixpkgs) owner repo rev sha256 fetchSubmodules;
   };
 
-  pkgs = import src { overlays = [ overlay ]; };
+  pkgs = import src { };
 
-  haskellPackages = pkgs.haskell.packages."${compiler}";
+  haskellPackages = pkgs.haskell.packages."${compiler}".override {
+    overrides = new: old: {
+      haskell-project-template = old.callPackage ./. { };
+    };
+  };
 
   # Specifying ghc packages this way ensures that ghc-pkg can see our packages
   ghcAndPackages = haskellPackages.ghcWithPackages (self : [
