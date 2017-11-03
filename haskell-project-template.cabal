@@ -1,0 +1,60 @@
+-- This file has been generated from package.yaml by hpack version 0.19.1.
+--
+-- see: https://github.com/sol/hpack
+
+name:           haskell-project-template
+version:        0.1.0.0
+homepage:       https://github.com/srdqty/haskell-project-template#readme
+bug-reports:    https://github.com/srdqty/haskell-project-template/issues
+author:         Sophia Donataccio
+maintainer:     srdqty@gmail.com
+copyright:      Copyright (c) 2017 Sophia Donataccio
+license:        BSD3
+build-type:     Simple
+cabal-version:  >= 1.10
+
+extra-source-files:
+    ChangeLog.md
+    README.md
+
+source-repository head
+  type: git
+  location: https://github.com/srdqty/haskell-project-template
+
+library
+  hs-source-dirs:
+      src
+  ghc-options: -Wall
+  build-depends:
+      base >=4.7 && <5
+  exposed-modules:
+      HaskellProjectTemplate
+  other-modules:
+      Paths_haskell_project_template
+  default-language: Haskell2010
+
+executable haskell-project-template
+  main-is: Main.hs
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall
+  build-depends:
+      base >=4.7 && <5
+    , haskell-project-template
+  other-modules:
+      Paths_haskell_project_template
+  default-language: Haskell2010
+
+test-suite haskell-project-template-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall
+  build-depends:
+      base >=4.7 && <5
+    , haskell-project-template
+    , hspec
+  other-modules:
+      Paths_haskell_project_template
+  default-language: Haskell2010
