@@ -1,18 +1,10 @@
 { compiler ? "ghc802" }:
 
 let
-  overrides = pkgs: haskellPackagesNew: haskellPackagesOld: rec {
-    haskell-project-template = haskellPackagesNew.callPackage ./. { };
-  };
-
-  config = {
-    packageOverrides = pkgs: rec {
-      haskell = pkgs.haskell // {
-        packages = pkgs.haskell.packages // {
-          "${compiler}" = pkgs.haskell.packages."${compiler}".override {
-            overrides = overrides pkgs;
-          };
-        };
+  overlay = self: super: {
+    haskell.packages."${compiler}" = super.haskell.packages."${compiler}".override {
+      overrides = new: old: {
+        haskell-project-template = old.callPackage ./. { };
       };
     };
   };
@@ -25,7 +17,7 @@ let
     inherit (nixpkgs) owner repo rev sha256 fetchSubmodules;
   };
 
-  pkgs = import src { inherit config; };
+  pkgs = import src { overlays = [ overlay ]; };
 
   haskellPackages = pkgs.haskell.packages."${compiler}";
 
