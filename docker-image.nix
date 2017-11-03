@@ -1,25 +1,6 @@
 { compiler ? "ghc802" }:
 
 let
-  overrides = pkgs: haskellPackagesNew: haskellPackagesOld: rec {
-    # Just the executable so our docker image drops down to 27 mb from 1.5 gb
-    haskell-project-template =
-      pkgs.haskell.lib.justStaticExecutables
-        (haskellPackagesNew.callPackage ./. { });
-  };
-
-  config = {
-    packageOverrides = pkgs: rec {
-      haskell = pkgs.haskell // {
-        packages = pkgs.haskell.packages // {
-          "${compiler}" = pkgs.haskell.packages."${compiler}".override {
-            overrides = overrides pkgs;
-          };
-        };
-      };
-    };
-  };
-
   bootstrap = import <nixpkgs> { };
 
   nixpkgs = builtins.fromJSON (builtins.readFile ./nixpkgs.json);
@@ -28,9 +9,15 @@ let
     inherit (nixpkgs) owner repo rev sha256 fetchSubmodules;
   };
 
-  pkgs = import src { inherit config; };
+  pkgs = import src { };
 
-  haskellPackages = pkgs.haskell.packages."${compiler}";
+  haskellPackages = pkgs.haskell.packages."${compiler}".override {
+    overrides = new: old: {
+      haskell-project-template =
+        pkgs.haskell.lib.justStaticExecutables
+          (old.callPackage ./. { });
+    };
+  };
 in
   pkgs.dockerTools.buildImage {
     name = "haskell-project-template-image";
