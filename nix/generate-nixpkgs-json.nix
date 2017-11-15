@@ -5,7 +5,7 @@ stdenv.mkDerivation rec {
 
   owner="NixOS";
   repo="nixpkgs";
-  sha="aebdc892d6aa6834a083fb8b56c43578712b0dab";
+  sha="eac38d0b1e68b4ae4f0b78fe778b61d0f314ae7a";
   url="https://github.com/${owner}/${repo}.git";
 
   project-root = builtins.toString ../.;
