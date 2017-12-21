@@ -4,6 +4,13 @@ My template for creating new haskell projects using cabal and nix.
 
 ## Initialization
 
+First rename the project. This will go through and replace all the
+haskell-project-template text to your project name.
+
+```
+nix-shell --argstr project-name <your-project-name> nix/change-project-name.nix
+```
+
 This script generates the information necessary for pinning nixpkgs to a known
 commit. Useful for reproducible builds. This tends to take a while because
 the nixpkgs repo is pretty large. Should only need to run this once unless you
@@ -81,7 +88,7 @@ ghc-pkg list
 GHCi, version 8.0.2: http://www.haskell.org/ghc/  :? for help
 Loaded GHCi configuration from /home/srdqty/.ghc/ghci.conf
 
-λ> import HaskellProjectTemplate
+λ> import Lib
 
 λ> helloWorld
 "hello world!"

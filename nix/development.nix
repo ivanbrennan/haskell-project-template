@@ -19,6 +19,7 @@ in
   haskellPackages.haskell-project-template.env.overrideAttrs (old: rec {
     buildInputs = [
       pkgs.git
+      pkgs.vim
       pkgs.ncurses # Needed by the bash-prompt.sh script
       ghcAndPackages
     ];
