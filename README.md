@@ -10,7 +10,7 @@ the nixpkgs repo is pretty large. Should only need to run this once unless you
 want to change to a different commit sha.
 
 ```
-nix-shell nix/generate-nixpkgs-json.nix
+nix-shell --pure nix/generate-nixpkgs-json.nix
 ```
 
 
@@ -18,7 +18,7 @@ This script genereates the cabal file and nix file from the hpack yaml file.
 Rerurn this whenever you update the hpack yaml file.
 
 ```
-nix-shell nix/generate-cabal-and-nix-file.nix
+nix-shell --pure nix/generate-cabal-and-nix-file.nix
 ```
 
 ## Development
@@ -30,11 +30,7 @@ your project and build it using cabal.
 ```
 # Enter the development environment
 
-nix-shell nix/development.nix
-```
-
-```
-cabal configure
+nix-shell --pure nix/development.nix
 ```
 
 ```
@@ -43,7 +39,15 @@ cabal build
 
 ## Running Tests
 
-TODO
+```
+# Enter the development environment
+
+nix-shell --pure nix/development.nix
+```
+
+```
+cabal test
+```
 
 ## Release Build
 
@@ -54,7 +58,7 @@ to your system or used by another project that depends on it.
 ```
 # Enter the release environment
 
-nix-shell nix/release.nix
+nix-shell --pure nix/release.nix
 ```
 
 
@@ -91,7 +95,7 @@ it :: String
 You can use nix to build a docker image for your project.
 
 ```
-# Build the image
+# Build the image. We don't use pure so we can use the system docker and nix-build.
 
 nix-shell nix/build-docker-image.nix
 ```

@@ -1,7 +1,7 @@
 { compiler ? "ghc802" }:
 
 let
-  pkgs = import ./nixpkgs-pinned.nix;
+  pkgs = import ./nixpkgs-pinned.nix { };
 
   haskellPackages = pkgs.haskell.packages."${compiler}".override {
     overrides = new: old: {
@@ -21,6 +21,7 @@ in
     name = "haskell-project-template-release";
 
     buildInputs = [
+      pkgs.ncurses # Needed by the bash-prompt.sh script.
       ghcAndPackages
     ];
 

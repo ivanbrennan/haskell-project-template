@@ -1,4 +1,4 @@
-with import ./nixpkgs-pinned.nix;
+with import ./nixpkgs-pinned.nix {};
 
 stdenv.mkDerivation rec {
   name = "generate-cabal-and-project-nix-file";

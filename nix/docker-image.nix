@@ -1,7 +1,10 @@
-{ compiler ? "ghc802" }:
+{ compiler ? "ghc802"
+, image-name
+, image-tag
+}:
 
 let
-  pkgs = import ./nixpkgs-pinned.nix;
+  pkgs = import ./nixpkgs-pinned.nix {};
 
   haskellPackages = pkgs.haskell.packages."${compiler}".override {
     overrides = new: old: {
@@ -12,8 +15,8 @@ let
   };
 in
   pkgs.dockerTools.buildImage {
-    name = "haskell-project-template-image";
-    tag = "latest";
+    name = image-name;
+    tag = image-tag;
 
     contents = [
       haskellPackages.haskell-project-template
