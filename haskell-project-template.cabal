@@ -1,4 +1,4 @@
--- This file has been generated from package.yaml by hpack version 0.19.1.
+-- This file has been generated from package.yaml by hpack version 0.18.1.
 --
 -- see: https://github.com/sol/hpack
 
@@ -26,9 +26,9 @@ library
       src
   ghc-options: -Wall
   build-depends:
-      base >=4.7 && <5
+      base >= 4.7 && < 5
   exposed-modules:
-      HaskellProjectTemplate
+      Lib
   other-modules:
       Paths_haskell_project_template
   default-language: Haskell2010
@@ -39,10 +39,8 @@ executable haskell-project-template
       app
   ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall
   build-depends:
-      base >=4.7 && <5
+      base >= 4.7 && < 5
     , haskell-project-template
-  other-modules:
-      Paths_haskell_project_template
   default-language: Haskell2010
 
 test-suite haskell-project-template-test
@@ -52,9 +50,7 @@ test-suite haskell-project-template-test
       test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall
   build-depends:
-      base >=4.7 && <5
+      base >= 4.7 && < 5
     , haskell-project-template
     , hspec
-  other-modules:
-      Paths_haskell_project_template
   default-language: Haskell2010

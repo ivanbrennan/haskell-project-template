@@ -1,6 +1,6 @@
 module Main where
 
-import HaskellProjectTemplate
+import Lib
 
 main :: IO ()
 main = putStrLn helloWorld

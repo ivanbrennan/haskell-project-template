@@ -1,4 +1,4 @@
-module HaskellProjectTemplate where
+module Lib where
 
 helloWorld :: String
 helloWorld = "hello world!"
