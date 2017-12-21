@@ -1,12 +1,14 @@
+{ config ? {} }:
+
 let
-  bootstrap = import <nixpkgs> { };
+  fetch-nixpkgs = import ./fetch-nixpkgs.nix;
 
-  nixpkgs = builtins.fromJSON (builtins.readFile ./nixpkgs.json);
+  nixpkgs-args = builtins.fromJSON (builtins.readFile ./nixpkgs.json);
 
-  src = bootstrap.fetchFromGitHub {
-    inherit (nixpkgs) owner repo rev sha256 fetchSubmodules;
+  nixpkgs = fetch-nixpkgs {
+    inherit (nixpkgs-args) owner repo rev sha256;
   };
 
-  pkgs = import src { };
+  pkgs = import nixpkgs { config = config; };
 in
   pkgs

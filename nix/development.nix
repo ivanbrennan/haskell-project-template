@@ -1,7 +1,7 @@
 { compiler ? "ghc802" }:
 
 let
-  pkgs = import ./nixpkgs-pinned.nix;
+  pkgs = import ./nixpkgs-pinned.nix {};
 
   haskellPackages = pkgs.haskell.packages."${compiler}".override {
     overrides = new: old: {
@@ -19,6 +19,7 @@ in
   haskellPackages.haskell-project-template.env.overrideAttrs (old: rec {
     buildInputs = [
       pkgs.git
+      pkgs.ncurses # Needed by the bash-prompt.sh script
       ghcAndPackages
     ];
 
