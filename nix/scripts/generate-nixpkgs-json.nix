@@ -1,6 +1,6 @@
 { owner ? "NixOS"
 , repo ? "nixpkgs"
-, rev ? "1bc288591ea4fe3159b7630dcd2b57733d80a2ff"
+, rev ? "f96373262f5af078a4c118d9fb881eb7295dfe76"
 }:
 
 let
@@ -17,7 +17,7 @@ let
     }
   '';
 
-  project-root = builtins.toString ../.;
+  out-filename = builtins.toString ../nixpkgs-pinned/nixpkgs.json;
 in
 
 
@@ -32,7 +32,7 @@ pkgs.stdenv.mkDerivation rec {
   shellHook = ''
     set -eu
     sha256=$(sha256sum -b ${file} | awk -n '{printf $1}')
-    jq .+="{\"sha256\":\"$sha256\"}" ${json} > ${project-root}/nix/nixpkgs.json
+    jq .+="{\"sha256\":\"$sha256\"}" ${json} > ${out-filename}
     exit
   '';
 }

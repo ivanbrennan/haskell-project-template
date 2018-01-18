@@ -1,7 +1,7 @@
-{ compiler ? "ghc802" }:
+{ compiler ? import ./ghc.nix }:
 
 let
-  pkgs = import ./nixpkgs-pinned.nix { };
+  pkgs = import ./nixpkgs-pinned { };
 
   haskellPackages = pkgs.haskell.packages."${compiler}".override {
     overrides = new: old: {

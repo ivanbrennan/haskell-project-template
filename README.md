@@ -8,7 +8,7 @@ First rename the project. This will go through and replace all the
 haskell-project-template text to your project name.
 
 ```
-nix-shell --argstr project-name <your-project-name> nix/change-project-name.nix
+nix-shell --argstr project-name <your-project-name> nix/scripts/change-project-name.nix
 ```
 
 This script generates the information necessary for pinning nixpkgs to a known
@@ -17,7 +17,7 @@ the nixpkgs repo is pretty large. Should only need to run this once unless you
 want to change to a different commit sha.
 
 ```
-nix-shell --pure nix/generate-nixpkgs-json.nix
+nix-shell --pure nix/scripts/generate-nixpkgs-json.nix
 ```
 
 
@@ -25,7 +25,7 @@ This script genereates the cabal file and nix file from the hpack yaml file.
 Rerurn this whenever you update the hpack yaml file.
 
 ```
-nix-shell --pure nix/generate-cabal-and-nix-file.nix
+nix-shell --pure nix/scripts/generate-cabal-and-nix-file.nix
 ```
 
 ## Development
@@ -104,7 +104,7 @@ You can use nix to build a docker image for your project.
 ```
 # Build the image. We don't use pure so we can use the system docker and nix-build.
 
-nix-shell nix/build-docker-image.nix
+nix-shell nix/scripts/build-docker-image.nix
 ```
 
 ```

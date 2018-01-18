@@ -4,8 +4,8 @@
 }:
 
 let
-  nixpkgs = import ./nixpkgs-pinned.nix {};
-  project-root = builtins.toString ../.;
+  nixpkgs = import ../nixpkgs-pinned {};
+  project-root = import ../project-root.nix;
 
   docker-push = nixpkgs.lib.optionalString push-image ''
     docker push ${image-name}:${image-tag}

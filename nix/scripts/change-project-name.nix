@@ -1,11 +1,11 @@
 { project-name }:
 
-with import ./nixpkgs-pinned.nix {};
+with import ../nixpkgs-pinned {};
 
 stdenv.mkDerivation rec {
   name = "change-project-name";
 
-  project-root = builtins.toString ../.;
+  project-root = import ../project-root.nix;
 
   buildInputs = [
     haskellPackages.hpack
@@ -36,7 +36,7 @@ stdenv.mkDerivation rec {
 
     rm ${project-root}/haskell-project-template.cabal
 
-    nix-shell --pure ${project-root}/nix/generate-cabal-and-nix-file.nix
+    nix-shell --pure ${project-root}/nix/scripts/generate-cabal-and-nix-file.nix
 
     exit
   '';

@@ -1,10 +1,10 @@
-{ compiler ? "ghc802"
+{ compiler ? import ./ghc.nix
 , image-name
 , image-tag
 }:
 
 let
-  pkgs = import ./nixpkgs-pinned.nix {};
+  pkgs = import ./nixpkgs-pinned {};
 
   haskellPackages = pkgs.haskell.packages."${compiler}".override {
     overrides = new: old: {

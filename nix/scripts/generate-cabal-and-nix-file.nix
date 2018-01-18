@@ -1,9 +1,9 @@
-with import ./nixpkgs-pinned.nix {};
+with import ../nixpkgs-pinned {};
 
 stdenv.mkDerivation rec {
   name = "generate-cabal-and-project-nix-file";
 
-  project-root = builtins.toString ../.;
+  project-root = import ../project-root.nix;
 
   buildInputs = [
     haskellPackages.hpack
