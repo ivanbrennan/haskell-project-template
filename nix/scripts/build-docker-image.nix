@@ -1,6 +1,7 @@
 { image-name ? "haskell-project-template-image"
 , image-tag ? "latest"
 , push-image ? false
+, compiler ? import ../ghc.nix
 }:
 
 let
@@ -24,6 +25,7 @@ stdenv.mkDerivation rec {
     nix-build '${project-root}/nix/docker-image.nix' \
       --argstr image-name ${image-name} \
       --argstr image-tag ${image-tag} \
+      --argstr compiler ${compiler} \
       --out-link '${project-root}/docker-image.tar.gz'
 
     docker load -i '${project-root}/docker-image.tar.gz'

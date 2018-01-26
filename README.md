@@ -112,3 +112,14 @@ nix-shell nix/scripts/build-docker-image.nix
 
 docker run --rm haskell-project-template-image
 ```
+
+## Different compiler versions
+
+You can either edit `nix/ghc.nix` or specify a compiler version at the command
+line as demonstrated below.
+
+```
+nix-shell --pure nix/development.nix --argstr compiler ghc802
+nix-shell --pure nix/release.nix --argstr compiler ghc802
+nix-shell nix/scripts/build-docker-image.nix --argstr compiler ghc802
+```
