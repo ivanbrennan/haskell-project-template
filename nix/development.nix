@@ -3,9 +3,13 @@
 let
   pkgs = import ./nixpkgs-pinned {};
 
+  hlib = pkgs.haskell.lib;
+
+  withTestAndBench = drv: hlib.doCheck (hlib.doBenchmark drv);
+
   haskellPackages = pkgs.haskell.packages."${compiler}".override {
     overrides = new: old: {
-      haskell-project-template = old.callPackage ./.. { };
+      haskell-project-template = withTestAndBench (old.callPackage ./.. { });
     };
   };
 in
