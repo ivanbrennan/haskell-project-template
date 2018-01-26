@@ -12,13 +12,10 @@ let
   # Specifying ghc packages this way ensures that ghc-pkg can see our packages
   ghcAndPackages = haskellPackages.ghcWithPackages (self : [
     self.haskell-project-template
-    self.cabal-install
-    self.cabal2nix
-    self.hpack
   ]);
 in
   pkgs.stdenv.mkDerivation {
-    name = "haskell-project-template-release";
+    name = "${compiler}-haskell-project-template-release";
 
     buildInputs = [
       pkgs.ncurses # Needed by the bash-prompt.sh script.

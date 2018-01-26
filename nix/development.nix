@@ -10,6 +10,8 @@ let
   };
 in
   haskellPackages.haskell-project-template.env.overrideAttrs (old: rec {
+    name = compiler + "-" + old.name;
+
     buildInputs = [
       pkgs.git
       pkgs.vim
