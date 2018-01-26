@@ -19,6 +19,8 @@ stdenv.mkDerivation rec {
   # bothering with buildInputs.
 
   shellHook = ''
+    set -eu
+
     nix-build '${project-root}/nix/docker-image.nix' \
       --argstr image-name ${image-name} \
       --argstr image-tag ${image-tag} \

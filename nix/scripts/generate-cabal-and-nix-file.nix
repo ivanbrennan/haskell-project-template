@@ -11,6 +11,8 @@ stdenv.mkDerivation rec {
   ];
 
   shellHook = ''
+    set -eu
+
     echo -e "Running hpack to generate cabal file...\n"
     hpack ${project-root}
 
