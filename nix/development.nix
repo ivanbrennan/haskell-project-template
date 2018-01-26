@@ -8,20 +8,13 @@ let
       haskell-project-template = old.callPackage ./.. { };
     };
   };
-
-  # Specifying ghc packages this way ensures that ghc-pkg can see our packages
-  ghcAndPackages = haskellPackages.ghcWithPackages (self : [
-    self.cabal-install
-    self.cabal2nix
-    self.hpack
-  ]);
 in
   haskellPackages.haskell-project-template.env.overrideAttrs (old: rec {
     buildInputs = [
       pkgs.git
       pkgs.vim
       pkgs.ncurses # Needed by the bash-prompt.sh script
-      ghcAndPackages
+      pkgs.haskellPackages.cabal-install
     ];
 
     shellHook = old.shellHook + builtins.readFile ./bash-prompt.sh + ''
