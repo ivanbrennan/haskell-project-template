@@ -3,17 +3,17 @@
 let
   pkgs = import ./nixpkgs-pinned {};
 
+  project-root = import ./project-root.nix;
+
   hlib = pkgs.haskell.lib;
 
   withTestAndBench = drv: hlib.doCheck (hlib.doBenchmark drv);
 
-  haskellPackages = pkgs.haskell.packages."${compiler}".override {
-    overrides = new: old: {
-      haskell-project-template = withTestAndBench (old.callPackage ./.. { });
-    };
-  };
+  release = import ./release.nix { inherit compiler; };
+
+  development = withTestAndBench release;
 in
-  haskellPackages.haskell-project-template.env.overrideAttrs (old: rec {
+  development.env.overrideAttrs (old: rec {
     name = compiler + "-" + old.name;
 
     buildInputs = [

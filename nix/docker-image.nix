@@ -6,20 +6,16 @@
 let
   pkgs = import ./nixpkgs-pinned {};
 
-  haskellPackages = pkgs.haskell.packages."${compiler}".override {
-    overrides = new: old: {
-      haskell-project-template =
-        pkgs.haskell.lib.justStaticExecutables
-          (old.callPackage ../. { });
-    };
-  };
+  release = import ./release.nix { inherit compiler; };
+
+  executable = pkgs.haskell.lib.justStaticExecutables release;
 in
   pkgs.dockerTools.buildImage {
     name = image-name;
     tag = image-tag;
 
     contents = [
-      haskellPackages.haskell-project-template
+      executable
     ];
 
     config = {

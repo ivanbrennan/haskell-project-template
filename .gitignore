@@ -1,6 +1,9 @@
 # vim
 *.swp
 
+# nix-build
+result
+
 # docker build
 /docker-image.tar.gz
 

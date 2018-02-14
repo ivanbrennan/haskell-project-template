@@ -44,7 +44,27 @@ nix-shell --pure nix/development.nix
 cabal build
 ```
 
-## Running Tests
+### Repl
+
+```
+# Enter the development environment
+
+nix-shell --pure nix/development.nix
+```
+
+```
+# In the context of the executable build target
+
+cabal repl exe:haskell-project-template
+```
+
+```
+# In the context of the library build target
+
+cabal repl lib:haskell-project-template
+```
+
+### Running Tests
 
 ```
 # Enter the development environment
@@ -56,45 +76,29 @@ nix-shell --pure nix/development.nix
 cabal test
 ```
 
+### Without entering the development environment
+
+```
+nix-shell --pure nix/development.nix --run 'cabal build'
+nix-shell --pure nix/development.nix --run 'cabal repl exe:haskell-project-template'
+nix-shell --pure nix/development.nix --run 'cabal repl lib:haskell-project-template'
+nix-shell --pure nix/development.nix --run 'cabal test'
+```
+
 ## Release Build
 
-The purpose of this environment is to allow nix to build your project and enable
-you to test your executables or libraries the same way they would be installed
-to your system or used by another project that depends on it.
-
 ```
-# Enter the release environment
+# Build the package
 
-nix-shell --pure nix/release.nix
+nix-build nix/release.nix
+
+The built executable and library will be placed in ./result
 ```
-
 
 ```
 # Run your executable
 
-haskell-project-template
-```
-
-```
-# See your library in the package list
-
-ghc-pkg list
-```
-
-```
-# Your library is available for use
-
-λx. ghci
-GHCi, version 8.0.2: http://www.haskell.org/ghc/  :? for help
-Loaded GHCi configuration from /home/srdqty/.ghc/ghci.conf
-
-λ> import Lib
-
-λ> helloWorld
-"hello world!"
-it :: String
-
-λ>
+./result/bin/haskell-project-template
 ```
 
 ## Docker Image
