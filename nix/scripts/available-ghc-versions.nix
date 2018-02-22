@@ -1,7 +1,7 @@
 let
   pkgs = import ../nixpkgs-pinned {};
 
-  compilers = builtins.attrNames pkgs.haskell.packages;
+  compilers = builtins.attrNames pkgs.haskell.compiler;
 in
 
 pkgs.stdenv.mkDerivation rec {

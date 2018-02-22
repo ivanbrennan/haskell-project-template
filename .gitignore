@@ -3,6 +3,7 @@
 
 # nix-build
 result
+nix/lts-package-sets/*
 
 # docker build
 /docker-image.tar.gz
