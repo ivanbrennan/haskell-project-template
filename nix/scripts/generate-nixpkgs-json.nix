@@ -1,6 +1,6 @@
 { owner ? "NixOS"
 , repo ? "nixpkgs"
-, rev ? "f96373262f5af078a4c118d9fb881eb7295dfe76"
+, rev ? "16210c39962b14bd90b83586221716f65da06c6d"
 }:
 
 let
