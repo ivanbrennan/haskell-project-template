@@ -37,6 +37,7 @@ pkgs.stdenv.mkDerivation rec {
 
   buildInputs = [
     pkgs.jq
+    pkgs.nix
   ];
 
   shellHook = ''
