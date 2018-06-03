@@ -79,10 +79,10 @@ cabal test
 ### Without entering the development environment
 
 ```
-nix-shell --pure nix/development.nix --run 'cabal build'
-nix-shell --pure nix/development.nix --run 'cabal repl exe:haskell-project-template'
-nix-shell --pure nix/development.nix --run 'cabal repl lib:haskell-project-template'
-nix-shell --pure nix/development.nix --run 'cabal test'
+./cabal.sh build
+./cabal.sh repl exe:haskell-project-template
+./cabal.sh repl lib:haskell-project-template
+./cabal.sh test
 ```
 
 ## Release Build
