@@ -23,7 +23,13 @@ let
     }
   '';
 
-  out-filename = builtins.toString ../nixpkgs-pinned/nixpkgs.json;
+  out-filename = if
+    0 <= builtins.compareVersions builtins.nixVersion "1.12"
+  then
+    builtins.toString ../nixpkgs-pinned/nixpkgs-2.0.json
+  else
+    builtins.toString ../nixpkgs-pinned/nixpkgs-1.11.json
+  ;
 
   sha256calc = if newNix then
     "nix-hash --type sha256 --base32 ${file}"
