@@ -1,4 +1,6 @@
-{ config ? {} }:
+{ config ? {}
+, overlays ? []
+}:
 
 let
   fetch-nixpkgs = import ./fetch-nixpkgs.nix;
@@ -15,6 +17,6 @@ let
     inherit (nixpkgs-args) owner repo rev sha256;
   };
 
-  pkgs = import nixpkgs { config = config; };
+  pkgs = import nixpkgs { inherit config overlays; };
 in
   pkgs
