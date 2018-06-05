@@ -36,8 +36,9 @@ your project and build it using cabal.
 
 ```
 # Enter the development environment
+# This script automatically regenerates the default.nix and cabal files first.
 
-nix-shell --pure nix/development.nix
+./enter-dev.sh
 ```
 
 ```
@@ -49,7 +50,7 @@ cabal build
 ```
 # Enter the development environment
 
-nix-shell --pure nix/development.nix
+./enter-dev.sh
 ```
 
 ```
@@ -69,7 +70,7 @@ cabal repl lib:haskell-project-template
 ```
 # Enter the development environment
 
-nix-shell --pure nix/development.nix
+./enter-dev.sh
 ```
 
 ```
@@ -77,6 +78,8 @@ cabal test
 ```
 
 ### Without entering the development environment
+
+This script does not automatically regenerate the default.nix and cabal files.
 
 ```
 ./cabal.sh build

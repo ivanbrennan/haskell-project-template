@@ -10,7 +10,6 @@ result
 # generated config files
 *.cabal
 /default.nix
-nix/nixpkgs-pinned/nixpkgs.json
 
 # Created by https://www.gitignore.io/api/haskell
 

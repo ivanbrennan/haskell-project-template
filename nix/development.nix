@@ -17,8 +17,6 @@ in
     name = compiler + "-" + old.name;
 
     buildInputs = [
-      pkgs.git
-      pkgs.vim
       pkgs.ncurses # Needed by the bash-prompt.sh script
       pkgs.haskellPackages.cabal-install
     ];
