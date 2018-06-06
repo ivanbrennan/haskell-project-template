@@ -2,9 +2,9 @@ name:                haskell-project-template
 version:             0.1.0.0
 github:              srdqty/haskell-project-template
 license:             BSD3
-author:              Sophia Donataccio
+author:              Sofia Donataccio
 maintainer:          srdqty@gmail.com
-copyright:           Copyright (c) 2017 Sophia Donataccio
+copyright:           Copyright (c) 2018 Sofia Donataccio
 
 extra-source-files:
   - README.md
