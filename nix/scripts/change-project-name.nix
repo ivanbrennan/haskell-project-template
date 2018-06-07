@@ -15,8 +15,6 @@ stdenv.mkDerivation rec {
   shellHook = ''
     set -eu
 
-    name=$1
-
     paths="app
     ChangeLog.md
     nix
