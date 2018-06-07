@@ -28,7 +28,7 @@ stdenv.mkDerivation rec {
       echo "Update ${project-root}/$path"
       find "${project-root}/$path" \
         -type f \
-        \( -name "*" ! -name "change-project-name.nix" \) \
+        ! -name "change-project-name.nix" \
         | xargs -r sed -i -e "s/haskell-project-template/${project-name}/g"
     done
 
