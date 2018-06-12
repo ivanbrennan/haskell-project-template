@@ -34,7 +34,7 @@ let
   sha256calc = if newNix then
     "nix-hash --type sha256 --base32 ${file}"
   else
-    "sha256sum -b ${file} | awk -n '{print $1}'";
+    "sha256sum -b ${file} | cut -d ' ' -f 1";
 in
 
 
