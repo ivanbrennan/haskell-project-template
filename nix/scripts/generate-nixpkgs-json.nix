@@ -24,7 +24,7 @@ let
   '';
 
   out-filename = if
-    0 <= builtins.compareVersions builtins.nixVersion "1.12"
+    newNix
   then
     builtins.toString ../nixpkgs-pinned/nixpkgs-2.0.json
   else
