@@ -32,7 +32,7 @@ stdenv.mkDerivation rec {
         | xargs -r sed -i -e "s/haskell-project-template/${project-name}/g"
     done
 
-    rm ${project-root}/haskell-project-template.cabal
+    rm -f ${project-root}/haskell-project-template.cabal
 
     nix-shell --pure ${project-root}/nix/scripts/generate-cabal-and-nix-file.nix
 
