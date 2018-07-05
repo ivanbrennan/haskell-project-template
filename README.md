@@ -68,24 +68,7 @@ cabal repl lib:haskell-project-template
 ### Running Tests
 
 ```
-# Enter the development environment
-
-./enter-dev.sh
-```
-
-```
-cabal test
-```
-
-### Without entering the development environment
-
-This script does not automatically regenerate the default.nix and cabal files.
-
-```
-./cabal.sh build
-./cabal.sh repl exe:haskell-project-template
-./cabal.sh repl lib:haskell-project-template
-./cabal.sh test
+./run-tests.sh
 ```
 
 ## Release Build
