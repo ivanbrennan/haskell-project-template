@@ -1,5 +1,5 @@
 { config ? {}
-, overlays ? []
+, overlays ? import ../overlays.nix {}
 }:
 
 let

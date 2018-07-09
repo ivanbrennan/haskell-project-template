@@ -1,12 +1,16 @@
 { compiler ? import ./ghc.nix }:
 
 let
-  pkgs = import ./nixpkgs-pinned { };
+  haskellOverrides = pkgs: new: old: {
+    haskell-project-template = old.callPackage ./.. { };
+  };
 
-  haskellPackages = pkgs.haskell.packages."${compiler}".override {
-    overrides = new: old: {
-      haskell-project-template = old.callPackage ./.. { };
-    };
+  overlays = import ./overlays.nix {
+    extraHaskellOverride = haskellOverrides;
+  };
+
+  pkgs = import ./nixpkgs-pinned {
+    overlays = overlays;
   };
 in
-  haskellPackages.haskell-project-template
+  pkgs.haskellPackages.haskell-project-template
