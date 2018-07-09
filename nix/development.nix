@@ -22,7 +22,7 @@ in
     ];
 
     shellHook = old.shellHook + builtins.readFile ./bash-prompt.sh + ''
-      source ${pkgs.git.out}/etc/bash_completion.d/git-prompt.sh
-      source ${pkgs.git.out}/etc/bash_completion.d/git-completion.bash
+      source ${pkgs.git}/etc/bash_completion.d/git-prompt.sh
+      source ${pkgs.git}/etc/bash_completion.d/git-completion.bash
     '';
   })
