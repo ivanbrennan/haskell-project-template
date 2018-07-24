@@ -6,6 +6,7 @@ let
   };
 
   overlays = import ./overlays.nix {
+    compiler = compiler;
     extraHaskellOverride = haskellOverrides;
   };
 
