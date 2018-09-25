@@ -1,6 +1,6 @@
 { owner ? "NixOS"
 , repo ? "nixpkgs"
-, rev ? "f5b0d6d88963b77659348805f5347bb6655ec713"
+, rev ? "7df10f388dabe9af3320fe91dd715fc84f4c7e8a"
 }:
 
 let
@@ -8,12 +8,7 @@ let
 
   url="https://github.com/${owner}/${repo}/archive/${rev}.tar.gz";
 
-  newNix = 0 <= builtins.compareVersions builtins.nixVersion "1.12";
-
-  file = if newNix then
-    builtins.fetchTarball { url = url; }
-  else
-    builtins.fetchurl url;
+  file = builtins.fetchTarball { url = url; };
 
   json = builtins.toFile "data.json" ''
     { "url": "${url}"
@@ -23,18 +18,9 @@ let
     }
   '';
 
-  out-filename = if
-    newNix
-  then
-    builtins.toString ../nixpkgs-pinned/nixpkgs-2.0.json
-  else
-    builtins.toString ../nixpkgs-pinned/nixpkgs-1.11.json
-  ;
+  out-filename = builtins.toString ../nixpkgs-pinned/nixpkgs.json;
 
-  sha256calc = if newNix then
-    "nix-hash --type sha256 --base32 ${file}"
-  else
-    "sha256sum -b ${file} | cut -d ' ' -f 1";
+  sha256calc = "nix-hash --type sha256 --base32 ${file}";
 in
 
 

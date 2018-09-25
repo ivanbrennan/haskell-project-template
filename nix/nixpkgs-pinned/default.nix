@@ -3,18 +3,11 @@
 }:
 
 let
-  fetch-nixpkgs = import ./fetch-nixpkgs.nix;
+  nixpkgs-args = builtins.fromJSON (builtins.readFile ./nixpkgs.json);
 
-  nixpkgs-args = if
-    0 <= builtins.compareVersions builtins.nixVersion "1.12"
-  then
-    builtins.fromJSON (builtins.readFile ./nixpkgs-2.0.json)
-  else
-    builtins.fromJSON (builtins.readFile ./nixpkgs-1.11.json)
-  ;
-
-  nixpkgs = fetch-nixpkgs {
-    inherit (nixpkgs-args) owner repo rev sha256;
+  nixpkgs = with nixpkgs-args; builtins.fetchTarball {
+    url = "https://github.com/${owner}/${repo}/archive/${rev}.tar.gz";
+    inherit sha256;
   };
 
   pkgs = import nixpkgs { inherit config overlays; };
