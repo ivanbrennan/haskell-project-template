@@ -1,10 +1,10 @@
-let
-  pkgs = import ../nixpkgs-pinned {};
+{ nixpkgs }:
 
-  compilers = builtins.attrNames pkgs.haskell.packages;
+let
+  compilers = builtins.attrNames nixpkgs.haskell.packages;
 in
 
-pkgs.stdenv.mkDerivation rec {
+nixpkgs.stdenv.mkDerivation rec {
   name = "available-ghc-versions";
 
   shellHook = ''

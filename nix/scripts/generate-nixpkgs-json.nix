@@ -1,7 +1,4 @@
-{ owner ? "NixOS"
-, repo ? "nixpkgs"
-, rev ? "7df10f388dabe9af3320fe91dd715fc84f4c7e8a"
-}:
+{ owner, repo, rev }:
 
 let
   pkgs = import <nixpkgs> {};
@@ -18,7 +15,7 @@ let
     }
   '';
 
-  out-filename = builtins.toString ../nixpkgs-pinned/nixpkgs.json;
+  out-filename = builtins.toString ../nixpkgs/nixpkgs.json;
 
   sha256calc = "nix-hash --type sha256 --base32 ${file}";
 in

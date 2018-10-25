@@ -1,5 +1,6 @@
-{ config ? {}
-, overlays ? import ../overlays.nix {}
+{ compiler ? "ghc843"
+, config ? import ./config.nix
+, overlays ? import ./overlays.nix { inherit compiler; }
 }:
 
 let

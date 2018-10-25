@@ -2,114 +2,88 @@
 
 My template for creating new haskell projects using cabal and nix.
 
-## Initialization
+## Tools You Need
 
-First rename the project. This will go through and replace all the
-haskell-project-template text to your project name.
+You need the following tools. The rest will be installed within nix-shells.
 
-```
-nix-shell --argstr project-name <your-project-name> nix/scripts/change-project-name.nix
-```
+* nix
+* make
+* sed
+* find
 
-This script generates the information necessary for pinning nixpkgs to a known
-commit. Useful for reproducible builds. This tends to take a while because
-the nixpkgs repo is pretty large. Should only need to run this once unless you
-want to change to a different commit sha.
+## Rename Project
 
-```
-nix-shell --pure nix/scripts/generate-nixpkgs-json.nix
-```
-
-
-This script genereates the cabal file and nix file from the hpack yaml file.
-Rerurn this whenever you update the hpack yaml file.
+This runs sed to do a find and replace.
 
 ```
-nix-shell --pure nix/scripts/generate-cabal-and-nix-file.nix
+make change-project-name PROJECT_NAME=your-project-name
 ```
 
-## Development
+## Parameters
 
-The purpose of this environment is to make available everything that your project
-needs to compile, while leaving the project itself unbuilt. Then you can work on
-your project and build it using cabal.
+Taken from the Makefile.
 
 ```
-# Enter the development environment
-# This script automatically regenerates the default.nix and cabal files first.
+PROJECT_NAME?=haskell-project-template
 
-./enter-dev.sh
+GHC_COMPILER?=ghc843
+
+NIXPKGS_OWNER?=NixOS
+NIXPKGS_REPO?=nixpkgs
+NIXPKGS_REV?=7df10f388dabe9af3320fe91dd715fc84f4c7e8a
+
+DOCKER_IMAGE_NAME?=haskell-project-template
+DOCKER_IMAGE_TAG?=latest
+DOCKER_PUSH_IMAGE?=false
 ```
 
-```
-cabal build
-```
+## Commands
 
-### Repl
+You invoke all the commands using make.
 
-```
-# Enter the development environment
+### `make build`
 
-./enter-dev.sh
-```
+This sets up the proper environment and runs cabal build.
 
-```
-# In the context of the executable build target
+### `make run`
 
-cabal repl exe:haskell-project-template
-```
+This sets up the proper environment and runs cabal run.
 
-```
-# In the context of the library build target
+### `make test`
 
-cabal repl lib:haskell-project-template
-```
+This sets up the proper environment and runs cabal test.
 
-### Running Tests
+### `make nix-build`
 
-```
-./run-tests.sh
-```
+This builds the nix derivation for the project. The result is in the file
+`result`.
 
-## Release Build
+### `make nix-run`
 
-```
-# Build the package
+Builds the nix derivation, then runs the executable (assumed to be the same
+name as the project).
 
-nix-build nix/release.nix
+### `make docker-build`
 
-The built executable and library will be placed in ./result
-```
+This builds a docker image using nix.
 
-```
-# Run your executable
+### `make docker-run`
 
-./result/bin/haskell-project-template
-```
+This runs the docker image.
 
-## Docker Image
+### `make docker-push`
 
-You can use nix to build a docker image for your project.
+Attempts to push the docker image to a docker repo.
 
-```
-# Build the image. We don't use pure so we can use the system docker and nix-build.
+### `make update-nixpkgs`
 
-nix-shell nix/scripts/build-docker-image.nix
-```
+This command uses the NIXPKGS parameters above to generate the corresponding
+nixpkgs.json file needed to pin nixpkgs.
 
-```
-# Run a container
+### `make available-ghc-versions`
 
-docker run --rm haskell-project-template-image
-```
+This lists all the versions of ghc available with your pinned nixpkgs.
 
-## Different compiler versions
+### `make clean`
 
-You can either edit `nix/ghc.nix` or specify a compiler version at the command
-line as demonstrated below.
-
-```
-nix-shell --pure nix/development.nix --argstr compiler ghc802
-nix-shell --pure nix/release.nix --argstr compiler ghc802
-nix-shell nix/scripts/build-docker-image.nix --argstr compiler ghc802
-```
+Removes generated files.

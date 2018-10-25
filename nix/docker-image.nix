@@ -1,21 +1,14 @@
-{ compiler ? import ./ghc.nix
-, image-name
-, image-tag
-}:
+{ nixpkgs, image-name, image-tag }:
 
 let
-  pkgs = import ./nixpkgs-pinned {};
-
-  release = import ./release.nix { inherit compiler; };
-
-  executable = pkgs.haskell.lib.justStaticExecutables release;
+  release = import ./default.nix { inherit nixpkgs; };
 in
-  pkgs.dockerTools.buildImage {
+  nixpkgs.dockerTools.buildImage {
     name = image-name;
     tag = image-tag;
 
     contents = [
-      executable
+      release.static-executable
     ];
 
     config = {

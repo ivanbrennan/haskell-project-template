@@ -1,11 +1,9 @@
-{ compiler ? import ./ghc.nix
-, extraHaskellOverride ? (pkgs: new: old: {})
-}:
+{ compiler }:
 let
   haskellOverlay = (self: super: {
     haskellPackages = super.haskell.packages."${compiler}".override {
       overrides = (new: old: {
-      } // extraHaskellOverride self new old);
+      });
     };
   });
 
