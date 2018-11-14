@@ -26,7 +26,7 @@ Taken from the Makefile.
 ```
 PROJECT_NAME?=haskell-project-template
 
-GHC_COMPILER?=ghc843
+GHC_COMPILER?=ghc844
 
 NIXPKGS_OWNER?=NixOS
 NIXPKGS_REPO?=nixpkgs

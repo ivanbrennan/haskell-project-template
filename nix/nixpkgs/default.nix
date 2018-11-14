@@ -1,4 +1,4 @@
-{ compiler ? "ghc843"
+{ compiler ? "ghc844"
 , config ? import ./config.nix
 , overlays ? import ./overlays.nix { inherit compiler; }
 }:

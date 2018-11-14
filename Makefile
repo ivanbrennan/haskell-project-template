@@ -1,10 +1,10 @@
 PROJECT_NAME?=haskell-project-template
 
-GHC_COMPILER?=ghc843
+GHC_COMPILER?=ghc844
 
 NIXPKGS_OWNER?=NixOS
 NIXPKGS_REPO?=nixpkgs
-NIXPKGS_REV?=7df10f388dabe9af3320fe91dd715fc84f4c7e8a
+NIXPKGS_REV?=6141939d6e0a77c84905efd560c03c3032164ef1
 
 DOCKER_IMAGE_NAME?=haskell-project-template
 DOCKER_IMAGE_TAG?=latest
@@ -37,6 +37,12 @@ haskell-project-template.cabal: package.yaml
 
 default.nix: package.yaml haskell-project-template.cabal
 	nix-shell --pure nix/scripts/generate-default-nix-file.nix \
+		--arg nixpkgs '(import nix/nixpkgs { compiler = "$(GHC_COMPILER)"; })'
+
+.PHONY: nix-shell
+nix-shell: default.nix haskell-project-template.cabal
+	nix-shell nix \
+		--attr shell \
 		--arg nixpkgs '(import nix/nixpkgs { compiler = "$(GHC_COMPILER)"; })'
 
 .PHONY: nix-build

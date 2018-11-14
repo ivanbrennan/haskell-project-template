@@ -9,4 +9,8 @@ in
     devel = full.env.overrideAttrs (old: rec {
       buildInputs = old.buildInputs ++ [nixpkgs.haskellPackages.cabal-install];
     });
+    shell = devel.overrideAttrs (old: rec {
+      shellHook = old.shellHook + builtins.readFile ./bash-prompt.sh;
+      buildInputs = old.buildInputs ++ [];
+    });
   }
