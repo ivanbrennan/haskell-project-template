@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 6d7d01693f504018023940a1e8b77c20e6c30f860a87bbc4e304bbda3610d8b5
+-- hash: 4d782833af2f34b1d59cd20bf0c45ace7d43932d9c00e6865baea1c61d4a428a
 
 name:           haskell-project-template
 version:        0.1.0.0
@@ -29,7 +29,7 @@ library
       Paths_haskell_project_template
   hs-source-dirs:
       src
-  ghc-options: -Wall
+  ghc-options: -Wall -O2
   build-depends:
       base >=4.7 && <5
   default-language: Haskell2010
@@ -40,7 +40,7 @@ executable haskell-project-template
       Paths_haskell_project_template
   hs-source-dirs:
       app
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall -O2
   build-depends:
       base >=4.7 && <5
     , haskell-project-template
@@ -54,7 +54,7 @@ test-suite haskell-project-template-test
       Paths_haskell_project_template
   hs-source-dirs:
       test
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall -O2
   build-depends:
       base >=4.7 && <5
     , haskell-project-template
