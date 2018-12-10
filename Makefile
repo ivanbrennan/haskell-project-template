@@ -15,21 +15,32 @@ build: default.nix haskell-project-template.cabal
 	nix-shell --pure nix \
 		--attr devel \
 		--arg nixpkgs '(import nix/nixpkgs { compiler = "$(GHC_COMPILER)"; })' \
-		--run "cabal build"
+		--run "cabal new-build"
 
 .PHONY: run
 run: default.nix haskell-project-template.cabal
 	nix-shell --pure nix \
 		--attr devel \
 		--arg nixpkgs '(import nix/nixpkgs { compiler = "$(GHC_COMPILER)"; })' \
-		--run "cabal run"
+		--run "cabal new-run haskell-project-template"
 
 .PHONY: test
 test: default.nix haskell-project-template.cabal
 	nix-shell --pure nix \
 		--attr devel \
 		--arg nixpkgs '(import nix/nixpkgs { compiler = "$(GHC_COMPILER)"; })' \
-		--run "cabal test --show-details=direct"
+		--run "cabal new-run haskell-project-template-test"
+
+.PHONY: dump-ghc-core
+dump-ghc-core: default.nix haskell-project-template.cabal
+	nix-shell --pure nix \
+		--attr devel \
+		--arg nixpkgs '(import nix/nixpkgs { compiler = "$(GHC_COMPILER)"; })' \
+		--run "cabal new-build -fdump-ghc-core"
+
+.PHONY: list-ghc-core-files
+list-ghc-core-files:
+	find . -name '*.dump-simpl'
 
 haskell-project-template.cabal: package.yaml
 	nix-shell --pure nix/scripts/generate-cabal-file.nix \
@@ -94,6 +105,8 @@ change-project-name: clean
 .PHONY: clean
 clean:
 	rm -rf dist
+	rm -rf dist-newstyle
+	rm -f .ghc.environment.*
 	rm -f default.nix
 	rm -f haskell-project-template.cabal
 	rm -f result

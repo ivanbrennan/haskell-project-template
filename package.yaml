@@ -15,25 +15,52 @@ extra-source-files:
 # description:
 # category:            Web
 
+flags:
+  dump-ghc-core:
+    description: Dump ghc-core to file when compiling
+    manual: true
+    default: false
+
 dependencies:
   - base >= 4.7 && < 5
 
 library:
   source-dirs: src
-  ghc-options:
-    - -Wall
-    - -O2
+  when:
+  - condition: flag(dump-ghc-core)
+    then:
+      ghc-options:
+        - -Wall
+        - -O2
+        - -ddump-simpl
+        - -ddump-to-file
+    else:
+      ghc-options:
+        - -Wall
+        - -O2
 
 executables:
   haskell-project-template:
     main: Main.hs
     source-dirs: app
-    ghc-options:
-      - -threaded
-      - -rtsopts
-      - -with-rtsopts=-N
-      - -Wall
-      - -O2
+    when:
+    - condition: flag(dump-ghc-core)
+      then:
+        ghc-options:
+          - -threaded
+          - -rtsopts
+          - -with-rtsopts=-N
+          - -Wall
+          - -O2
+          - -ddump-simpl
+          - -ddump-to-file
+      else:
+        ghc-options:
+          - -threaded
+          - -rtsopts
+          - -with-rtsopts=-N
+          - -Wall
+          - -O2
     dependencies:
       - haskell-project-template
 
@@ -41,12 +68,24 @@ tests:
   haskell-project-template-test:
     main: Spec.hs
     source-dirs: test
-    ghc-options:
-      - -threaded
-      - -rtsopts
-      - -with-rtsopts=-N
-      - -Wall
-      - -O2
+    when:
+    - condition: flag(dump-ghc-core)
+      then:
+        ghc-options:
+          - -threaded
+          - -rtsopts
+          - -with-rtsopts=-N
+          - -Wall
+          - -O2
+          - -ddump-simpl
+          - -ddump-to-file
+      else:
+        ghc-options:
+          - -threaded
+          - -rtsopts
+          - -with-rtsopts=-N
+          - -Wall
+          - -O2
     dependencies:
       - haskell-project-template
       - hspec

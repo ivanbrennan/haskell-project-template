@@ -1,5 +1,6 @@
-# vim
 *.swp
+*~
+*.ghc.environment.*
 
 # nix-build
 result
