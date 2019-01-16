@@ -24,6 +24,20 @@ run: default.nix haskell-project-template.cabal
 		--arg nixpkgs '(import nix/nixpkgs { compiler = "$(GHC_COMPILER)"; })' \
 		--run "cabal new-run haskell-project-template"
 
+.PHONY: repl-lib
+repl-lib: default.nix haskell-project-template.cabal
+	nix-shell --pure nix \
+		--attr devel \
+		--arg nixpkgs '(import nix/nixpkgs { compiler = "$(GHC_COMPILER)"; })' \
+		--run "cabal new-repl haskell-project-template"
+
+.PHONY: repl-exe
+repl-exe: default.nix haskell-project-template.cabal
+	nix-shell --pure nix \
+		--attr devel \
+		--arg nixpkgs '(import nix/nixpkgs { compiler = "$(GHC_COMPILER)"; })' \
+		--run "cabal new-repl exe:haskell-project-template"
+
 .PHONY: test
 test: default.nix haskell-project-template.cabal
 	nix-shell --pure nix \
