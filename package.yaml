@@ -31,12 +31,17 @@ library:
     then:
       ghc-options:
         - -Wall
+        - -Wredundant-constraints
         - -O2
         - -ddump-simpl
         - -ddump-to-file
+        - -dsuppress-module-prefixes
+        - -dsuppress-idinfo
+        - -fforce-recomp
     else:
       ghc-options:
         - -Wall
+        - -Wredundant-constraints
         - -O2
 
 executables:
@@ -51,15 +56,20 @@ executables:
           - -rtsopts
           - -with-rtsopts=-N
           - -Wall
+          - -Wredundant-constraints
           - -O2
           - -ddump-simpl
           - -ddump-to-file
+          - -dsuppress-module-prefixes
+          - -dsuppress-idinfo
+          - -fforce-recomp
       else:
         ghc-options:
           - -threaded
           - -rtsopts
           - -with-rtsopts=-N
           - -Wall
+          - -Wredundant-constraints
           - -O2
     dependencies:
       - haskell-project-template
@@ -76,15 +86,20 @@ tests:
           - -rtsopts
           - -with-rtsopts=-N
           - -Wall
+          - -Wredundant-constraints
           - -O2
           - -ddump-simpl
           - -ddump-to-file
+          - -dsuppress-module-prefixes
+          - -dsuppress-idinfo
+          - -fforce-recomp
       else:
         ghc-options:
           - -threaded
           - -rtsopts
           - -with-rtsopts=-N
           - -Wall
+          - -Wredundant-constraints
           - -O2
     dependencies:
       - haskell-project-template
