@@ -1,8 +1,10 @@
--- This file has been generated from package.yaml by hpack version 0.28.2.
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.31.2.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 96d9d48cdbb1c1f0bbd4fe73e068daa25d000359284e7225e9b65f1d082f5b77
+-- hash: 3238e4308deb8693d47769616b1dbba91143b9d7131eb0db76d8533eaca164f4
 
 name:           haskell-project-template
 version:        0.1.0.0
@@ -13,10 +15,9 @@ maintainer:     srdqty@gmail.com
 copyright:      Copyright (c) 2018 Sofia Donataccio
 license:        BSD3
 build-type:     Simple
-cabal-version:  >= 1.10
 extra-source-files:
-    ChangeLog.md
     README.md
+    ChangeLog.md
 
 source-repository head
   type: git

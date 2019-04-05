@@ -1,7 +1,7 @@
 {
-  "url": "https://github.com/NixOS/nixpkgs/archive/80738ed9dc0ce48d7796baed5364eef8072c794d.tar.gz",
-  "rev": "80738ed9dc0ce48d7796baed5364eef8072c794d",
+  "url": "https://github.com/NixOS/nixpkgs/archive/4aeafc6b63fbf9b0207ce51a3bbf0bc81c807115.tar.gz",
+  "rev": "4aeafc6b63fbf9b0207ce51a3bbf0bc81c807115",
   "owner": "NixOS",
   "repo": "nixpkgs",
-  "sha256": "0anmvr6b47gbbyl9v2fn86mfkcwgpbd5lf0yf3drgm8pbv57c1dc"
+  "sha256": "0va50i6fr75qlkcnrys51fv5z4z3ybjv1kdpi6r8idxsx77vhc0h"
 }

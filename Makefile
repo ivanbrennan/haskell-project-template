@@ -1,6 +1,6 @@
 PROJECT_NAME?=haskell-project-template
 
-GHC_COMPILER?=ghc844
+GHC_COMPILER?=ghc864
 
 NIXPKGS_OWNER?=NixOS
 NIXPKGS_REPO?=nixpkgs
